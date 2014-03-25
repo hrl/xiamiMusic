@@ -69,10 +69,11 @@ class XiamiMusicDetail:
 
         self.xmlDoc = minidom.parseString(self.xmlPage)
         self.title = self.xmlDoc.getElementsByTagName('title')[0].firstChild.data
-        self.album_id = int(self.xmlDoc.getElementsByTagName('album_id')[0].firstChild.data)
-        self.album_name = self.xmlDoc.getElementsByTagName('album_name')[0].firstChild.data
+        self.albumID = int(self.xmlDoc.getElementsByTagName('album_id')[0].firstChild.data)
+        self.albumUrl = "http://www.xiami.com/album/%d" % self.albumID
+        self.albumName = self.xmlDoc.getElementsByTagName('album_name')[0].firstChild.data
         self.artist = self.xmlDoc.getElementsByTagName('artist')[0].firstChild.data
-        self.artist_url = self.xmlDoc.getElementsByTagName('artist_url')[0].firstChild.data
+        self.artistUrl = self.xmlDoc.getElementsByTagName('artist_url')[0].firstChild.data
         self.pic = self.xmlDoc.getElementsByTagName('pic')[0].firstChild.data
         self.lyric = self.xmlDoc.getElementsByTagName('lyric')[0].firstChild.data
         self.location = self.xmlDoc.getElementsByTagName('location')[0].firstChild.data
@@ -92,14 +93,14 @@ if __name__ == "__main__":
             musicDetail.loadDetail()
             print("\n" + "-" * 80)
             print("Title: " + musicDetail.title)
-            print("Album ID: " + str(musicDetail.album_id))
-            print("Album Name: " + musicDetail.album_name)
-            print("Artist: " + musicDetail.artist)
-            print("Artist URL: " + musicDetail.artist_url)
+            print("Album Name: " + musicDetail.albumName)
+            print("Album URL: " + musicDetail.albumUrl)
+            print("Artist Name: " + musicDetail.artist)
+            print("Artist URL: " + musicDetail.artistUrl)
             print("Picture: " + musicDetail.pic)
             print("Lyric: " + musicDetail.lyric)
             #print("Location(encrypted): " + musicDetail.location)
-            print("Location: " + musicDetail.deEncedLocation)
+            print("MP3 URL: " + musicDetail.deEncedLocation)
             print("-" * 80 + "\n")
         except:
             print("Invalid ID or Network Error, Please try again.\n")
